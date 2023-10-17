@@ -1,0 +1,42 @@
+include(ILCommon)
+
+add_subdirectory(Dialect)
+#add_subdirectory(Typing)
+#add_subdirectory(Conversion)
+#add_subdirectory(CAPI)
+#add_subdirectory(E2E)
+#add_subdirectory(runtime)
+#add_subdirectory(JITRuntime)
+
+#if(IL_ENABLE_REFJIT)
+#  add_subdirectory(Backend/RefJIT)
+#endif()
+
+add_mlir_library(NpInitAll
+  InitAll.cpp
+
+  LINK_COMPONENTS
+  Core
+
+  LINK_LIBS PUBLIC
+  MLIRIR
+  MLIRSupport
+
+  #ILTCF
+  #ILTCP
+  #ILE2E
+  #ILIlrt
+  NpBasicpyDialect
+  #ILBasicpyPasses
+  #ILNumpyDialect
+  #ILNumpyPasses
+  #ILTCFPasses
+  #ILTypingCPASupport
+  #ILTypingPasses
+  #NumpyToTCF
+  #TCFToTCP
+  #TCPToLinalg
+  #BasicpyToStd
+)
+
+il_mlir_target_includes(NpInitAll)
