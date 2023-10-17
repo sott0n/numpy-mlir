@@ -1,5 +1,5 @@
-#ifndef IL_DIALECT_BASICPY_IR_BASICPY_OPS_H
-#define IL_DIALECT_BASICPY_IR_BASICPY_OPS_H
+#ifndef NPC_DIALECT_BASICPY_IR_BASICPY_OPS_H
+#define NPC_DIALECT_BASICPY_IR_BASICPY_OPS_H
 
 #include "mlir/IR/Attributes.h"
 #include "mlir/IR/Builders.h"
@@ -17,4 +17,4 @@
 #define GET_OP_CLASSES
 #include "Dialect/Basicpy/IR/BasicpyOps.h.inc"
 
-#endif // IL_DIALECT_BASICPY_IR_BASICPY_OPS_H
+#endif // NPC_DIALECT_BASICPY_IR_BASICPY_OPS_H
