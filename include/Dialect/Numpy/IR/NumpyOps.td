@@ -40,7 +40,7 @@ def Numpy_NarrowOp : Numpy_Op<"narrow", []> {
 //===----------------------------------------------------------------------===//
 
 def Numpy_CreateArrayFromTensorOp : Numpy_Op<"create_array_from_tensor", [
-    //DeclareOpInterfaceMethods<Il_CPATypeInferenceOpInterface>,
+    DeclareOpInterfaceMethods<Npc_CPATypeInferenceOpInterface>,
     Pure]> {
   let summary = "Creates an ndarray from a tensor";
   let description = [{
@@ -57,8 +57,8 @@ def Numpy_CreateArrayFromTensorOp : Numpy_Op<"create_array_from_tensor", [
   }];
 }
 
-def Numpy_CopyToTensorOp : Numpy_Op<"copy_to_tensor"> {
-    //DeclareOpInterfaceMethods<Il_CPATypeInferenceOpInterface>]> {
+def Numpy_CopyToTensorOp : Numpy_Op<"copy_to_tensor", [
+    DeclareOpInterfaceMethods<Npc_CPATypeInferenceOpInterface>]> {
   let summary = "Copies an ndarray, yielding a value-typed tensor.";
   let description = [{
     The semantics of this operantion connote a copy of the data in the source
@@ -84,8 +84,8 @@ def Numpy_CopyToTensorOp : Numpy_Op<"copy_to_tensor"> {
 // See: https://docs.scipy.org/doc/numpy/reference/ufuncs.html
 //===----------------------------------------------------------------------===//
 
-def Numpy_BuiltinUfuncCallOp : Numpy_Op<"builtin_ufunc_call"> {
-    //DeclareOpInterfaceMethods<Il_CPATypeInferenceOpInterface>]> {
+def Numpy_BuiltinUfuncCallOp : Numpy_Op<"builtin_ufunc_call", [
+    DeclareOpInterfaceMethods<Npc_CPATypeInferenceOpInterface>]> {
   let summary = "A __call__ operation on named/builtin ufunc";
   let description = [{
     Simple ufunc call semantics for builtin ufuncs with none of the advanced

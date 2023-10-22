@@ -7,7 +7,7 @@
 #include "mlir/Support/LLVM.h"
 
 #include "Dialect/Common.h"
-//#include "Typing/Analysis/CPA/Interfaces.h"
+#include "Typing/Analysis/CPA/Interfaces.h"
 
 #include "Dialect/Numpy/IR/NumpyOpsDialect.h.inc"
 
@@ -38,8 +38,8 @@ public:
 };
 
 class NdArrayType
-    : public Type::TypeBase<NdArrayType, Type, detail::NdArrayTypeStorage> {
-                            // IlTypingTypeMapInterface::Trait> {
+    : public Type::TypeBase<NdArrayType, Type, detail::NdArrayTypeStorage,
+                            NpcTypingTypeMapInterface::Trait> {
 public:
   using Base::Base;
   static bool kindof(unsigned kind) {
@@ -64,7 +64,7 @@ public:
   TensorType toTensorType();
 
   /// CPA::TypeMapInterface method.
-  //Typing::CPA::TypeNode *mapToCPAType(Typing::CPA::Context &context);
+  Typing::CPA::TypeNode *mapToCPAType(Typing::CPA::Context &context);
 };
 
 } // namespace Numpy

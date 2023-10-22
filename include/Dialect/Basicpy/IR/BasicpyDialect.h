@@ -13,7 +13,7 @@
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 
 #include "Dialect/Common.h"
-//#include "Typing/Analysis/CPA/Interfaces.h"
+#include "Typing/Analysis/CPA/Interfaces.h"
 
 #include "Dialect/Basicpy/IR/BasicpyOpsDialect.h.inc"
 
@@ -117,7 +117,7 @@ public:
     return kind == BasicpyTypes::UnknownType;
   }
 
-  //Typing::CPA::TypeNode *mapToCPAType(Typing::CPA::Context &context);
+  Typing::CPA::TypeNode *mapToCPAType(Typing::CPA::Context &context);
 };
 
 } // namespace Basicpy

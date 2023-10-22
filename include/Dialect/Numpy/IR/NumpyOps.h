@@ -9,7 +9,7 @@
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 #include "mlir/Bytecode/BytecodeOpInterface.h"
 
-//#include "Typing/Analysis/CPA/Interfaces.h"
+#include "Typing/Analysis/CPA/Interfaces.h"
 
 #define GET_OP_CLASSES
 #include "Dialect/Numpy/IR/NumpyOps.h.inc"

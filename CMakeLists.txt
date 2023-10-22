@@ -17,7 +17,7 @@ endif()
 # Project setup and globals
 #-------------------------------------------------------------------------------
 
-project(il-dialect LANGUAGES CXX C)
+project(npc-dialect LANGUAGES CXX C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard to conform to")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
@@ -43,7 +43,7 @@ endif()
 # Options of Runtime
 #-------------------------------------------------------------------------------
 
-option(IL_ENABLE_REFJIT "Enables the reference JIT backend." ON)
+#option(NPC_ENABLE_REFJIT "Enables the reference JIT backend." ON)
 
 #-------------------------------------------------------------------------------
 # MLIR/LLVM Configuration
@@ -74,18 +74,18 @@ message(STATUS "LLVM lib directory path: ${LLVM_INCLUDE_DIRS}/../../mlir/lib")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_BINARY_DIR}/include)
 
-set(IL_MLIR_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(IL_MLIR_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
-message(STATUS "Building il-mlir project at ${IL_MLIR_SOURCE_DIR} (into ${IL_MLIR_BINARY_DIR})")
+set(NPC_MLIR_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(NPC_MLIR_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+message(STATUS "Building numpy-compiler project at ${NPC_MLIR_SOURCE_DIR} (into ${NPC_MLIR_BINARY_DIR})")
 
 link_directories(${LLVM_BUILD_LIBRARY_DIR})
 add_definitions(${LLVM_DEFINITIONS})
-set(IL_TABLEGEN_ARGS "")
+set(NPC_TABLEGEN_ARGS "")
 
 add_subdirectory(include)
 add_subdirectory(lib)
 #add_subdirectory(test)
-#add_subdirectory(tools)
+add_subdirectory(tools)
 #
 #add_custom_target(check-il-all)
 #add_dependencies(check-il-all check-il)

@@ -1,7 +1,7 @@
-include(ILCommon)
+include(NpcCommon)
 
 add_subdirectory(Dialect)
-#add_subdirectory(Typing)
+add_subdirectory(Typing)
 #add_subdirectory(Conversion)
 #add_subdirectory(CAPI)
 #add_subdirectory(E2E)
@@ -26,7 +26,7 @@ add_mlir_library(NpInitAll
   #ILTCP
   #ILE2E
   #ILIlrt
-  NpBasicpyDialect
+  NpcBasicpyDialect
   #ILBasicpyPasses
   #ILNumpyDialect
   #ILNumpyPasses
@@ -39,4 +39,4 @@ add_mlir_library(NpInitAll
   #BasicpyToStd
 )
 
-il_mlir_target_includes(NpInitAll)
+npc_mlir_target_includes(NpInitAll)

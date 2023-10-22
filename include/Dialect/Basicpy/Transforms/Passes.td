@@ -1,5 +1,5 @@
-#ifndef IL_BASICPY_PASSES
-#define IL_BASICPY_PASSES
+#ifndef NPC_BASICPY_PASSES
+#define NPC_BASICPY_PASSES
 
 include "mlir/Pass/PassBase.td"
 
@@ -9,7 +9,7 @@ include "mlir/Pass/PassBase.td"
 
 def FunctionTypeInference : Pass<"basicpy-type-inference", "func::FuncOp"> {
   let summary = "Performs function level type inference";
-  let constructor = "mlir::il::Basicpy::createFunctionTypeInferencePass()";
+  let constructor = "mlir::npc::Basicpy::createFunctionTypeInferencePass()";
 }
 
-#endif // IL_BASICPY_PASSES
+#endif // NPC_BASICPY_PASSES
