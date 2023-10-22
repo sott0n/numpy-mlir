@@ -16,6 +16,7 @@ def Numpy_Dialect : Dialect {
   }];
   let cppNamespace = "::mlir::npc::Numpy";
   let useDefaultTypePrinterParser = 1;
+  let dependentDialects = ["Basicpy::BasicpyDialect"];
 }
 
 //===----------------------------------------------------------------------===//

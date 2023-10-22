@@ -5,6 +5,7 @@
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/MLIRContext.h"
 #include "mlir/Support/LLVM.h"
+#include "mlir/Dialect/Arith/IR/Arith.h"
 
 #include "Dialect/Common.h"
 #include "Typing/Analysis/CPA/Interfaces.h"

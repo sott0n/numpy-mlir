@@ -5,7 +5,7 @@
 
 #include "Dialect/Basicpy/IR/BasicpyDialect.h"
 //#include "Dialect/Basicpy/Transforms/Passes.h"
-//#include "Dialect/Numpy/IR/NumpyDialect.h"
+#include "Dialect/Numpy/IR/NumpyDialect.h"
 //#include "Dialect/Numpy/Transforms/Passes.h"
 //#include "Dialect/TCF/IR/TCFDialect.h"
 //#include "Dialect/TCF/Transforms/Passes.h"
@@ -22,14 +22,14 @@
 
 void mlir::npc::registerAllDialects(DialectRegistry &registry) {
   registry.insert<npc::Basicpy::BasicpyDialect>();
-  //registry.insert<il::Numpy::NumpyDialect>();
+  registry.insert<npc::Numpy::NumpyDialect>();
   //registry.insert<il::tcf::TCFDialect>();
   //registry.insert<il::tcp::TCPDialect>();
   //registry.insert<il::ilrt::IlrtDialect>();
 }
 
 namespace mlir {
-namespace il {
+namespace npc {
 
 //namespace Basicpy {
 //#define GEN_PASS_REGISTRATION
@@ -59,7 +59,7 @@ namespace il {
 //#define GEN_PASS_REGISTRATION
 //#include "E2E/Passes.h.inc"
 
-} // namespace il
+} // namespace npc
 } // namespace mlir
 
 void mlir::npc::registerAllPasses() {

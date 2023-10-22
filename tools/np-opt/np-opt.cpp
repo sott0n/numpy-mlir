@@ -7,6 +7,7 @@
 #include "mlir/IR/DialectRegistry.h"
 #include "mlir/Dialect/Func/IR/FuncOps.h"
 #include "mlir/Dialect/LLVMIR/LLVMDialect.h"
+#include "mlir/Dialect/Arith/IR/Arith.h"
 #include "mlir/Pass/PassRegistry.h"
 #include "mlir/Tools/mlir-opt/MlirOptMain.h"
 #include "mlir/IR/MLIRContext.h"
@@ -22,6 +23,7 @@ int main(int argc, char **argv) {
 
   DialectRegistry registry;
   registry.insert<mlir::func::FuncDialect>();
+  registry.insert<mlir::arith::ArithDialect>();
   registry.insert<mlir::LLVM::LLVMDialect>();
   mlir::npc::registerAllDialects(registry);
 

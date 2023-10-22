@@ -28,10 +28,10 @@ add_mlir_library(NpInitAll
   #ILIlrt
   NpcBasicpyDialect
   #ILBasicpyPasses
-  #ILNumpyDialect
+  NpcNumpyDialect
   #ILNumpyPasses
   #ILTCFPasses
-  #ILTypingCPASupport
+  NpcTypingCPASupport
   #ILTypingPasses
   #NumpyToTCF
   #TCFToTCP
