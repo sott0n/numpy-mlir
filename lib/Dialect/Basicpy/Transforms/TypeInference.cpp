@@ -17,7 +17,6 @@
 using namespace mlir;
 using namespace mlir::npc;
 using namespace mlir::npc::Basicpy;
-using namespace std;
 
 namespace {
 
@@ -194,8 +193,8 @@ class TypeUnifier {
 public:
   using SubstMap = llvm::DenseMap<unsigned, TypeNode *>;
 
-  optional<SubstMap> unifyEquations(TypeEquations &equations) {
-    optional<SubstMap> subst;
+  std::optional<SubstMap> unifyEquations(TypeEquations &equations) {
+    std::optional<SubstMap> subst;
     subst.emplace();
 
     for (auto &eq : equations.getEquations()) {
@@ -207,7 +206,7 @@ public:
     return subst;
   }
 
-  mlir::Type resolveSubst(TypeNode *typeNode, const optional<SubstMap> &subst) {
+  mlir::Type resolveSubst(TypeNode *typeNode, const std::optional<SubstMap> &subst) {
     if (!subst) {
       return nullptr;
     }
@@ -225,8 +224,8 @@ public:
     return nullptr;
   }
 
-  optional<SubstMap> unify(TypeNode *typeX, TypeNode *typeY,
-                           optional<SubstMap> subst) {
+  std::optional<SubstMap> unify(TypeNode *typeX, TypeNode *typeY,
+                           std::optional<SubstMap> subst) {
     LLVM_DEBUG(llvm::dbgs() << "+ UNIFY: " << *typeX << ", " << *typeY << "\n");
     if (!subst) {
       emitError(typeX->getDef().getLoc()) << "cannot unify type";
@@ -244,7 +243,7 @@ public:
     }
   }
 
-  optional<SubstMap> unifyVariable(TypeNode *varNode, TypeNode *typeNode,
+  std::optional<SubstMap> unifyVariable(TypeNode *varNode, TypeNode *typeNode,
                                    SubstMap subst) {
     assert(varNode->getDiscrim() == TypeNode::Discrim::VAR_ORDINAL);
     LLVM_DEBUG(llvm::dbgs() << "  - UNIFY VARIABLE: " << *varNode << " <-"

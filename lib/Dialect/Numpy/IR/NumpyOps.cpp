@@ -17,8 +17,6 @@ using namespace mlir::npc::Numpy;
 // Type inference
 //===----------------------------------------------------------------------===//
 
-// TODO
-//
 /// Adds constraints to relating a unary op that accepts and returns either
 /// tensor or ndarray types where the dtype should be the same.
 /// Type constraints are added on the dtype, not the outer object type.

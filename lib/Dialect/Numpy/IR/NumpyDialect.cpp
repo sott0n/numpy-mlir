@@ -1,7 +1,7 @@
 #include "Dialect/Numpy/IR/NumpyDialect.h"
 #include "Dialect/Numpy/IR/NumpyOps.h"
 #include "Dialect/Basicpy/IR/BasicpyDialect.h"
-//#include "Typing/Support/CPAIrHelpers.h"
+#include "Typing/Support/CPAIrHelpers.h"
 
 #include "mlir/IR/DialectImplementation.h"
 #include "mlir/IR/MLIRContext.h"
@@ -209,27 +209,27 @@ TensorType NdArrayType::toTensorType() {
   }
 }
 
-//Typing::CPA::TypeNode *
-//NdArrayType::mapToCPAType(Typing::CPA::Context &context) {
-//  std::optional<Typing::CPA::TypeNode *> dtype;
-//  if (hasKnownDtype()) {
-//    // TODO: This should be using a general mechanism for resolving the dtype.
-//    // but we don't have that yet, and for NdArray, these must be primitives
-//    // anyway.
-//    dtype = context.getIRValueType(getDtype());
-//  }
-//  // Safe to capture an ArrayRef backed by type storage since it is uniqued.
-//  auto optionalShape = getOptionalShape();
-//  auto irCtor = [optionalShape](Typing::CPA::ObjectValueType *ovt,
-//                                llvm::ArrayRef<mlir::Type> fieldTypes,
-//                                MLIRContext *mlirContext,
-//                                std::optional<Location>) {
-//    assert(fieldTypes.size() == 1);
-//    return NdArrayType::get(fieldTypes.front(), optionalShape);
-//  };
-//  return Typing::CPA::newArrayType(context, irCtor,
-//                                   context.getIdentifier("!NdArray"), dtype);
-//}
+Typing::CPA::TypeNode *
+NdArrayType::mapToCPAType(Typing::CPA::Context &context) {
+  std::optional<Typing::CPA::TypeNode *> dtype;
+  if (hasKnownDtype()) {
+    // TODO: This should be using a general mechanism for resolving the dtype.
+    // but we don't have that yet, and for NdArray, these must be primitives
+    // anyway.
+    dtype = context.getIRValueType(getDtype());
+  }
+  // Safe to capture an ArrayRef backed by type storage since it is uniqued.
+  auto optionalShape = getOptionalShape();
+  auto irCtor = [optionalShape](Typing::CPA::ObjectValueType *ovt,
+                                llvm::ArrayRef<mlir::Type> fieldTypes,
+                                MLIRContext *mlirContext,
+                                std::optional<Location>) {
+    assert(fieldTypes.size() == 1);
+    return NdArrayType::get(fieldTypes.front(), optionalShape);
+  };
+  return Typing::CPA::newArrayType(context, irCtor,
+                                   context.getIdentifier("!NdArray"), dtype);
+}
 
 void NumpyDialect::initialize() {
   addOperations<

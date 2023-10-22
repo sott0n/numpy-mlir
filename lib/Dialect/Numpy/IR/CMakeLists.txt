@@ -1,4 +1,4 @@
-add_mlir_dialect_library(ILNumpyDialect
+add_mlir_dialect_library(NpcNumpyDialect
   NumpyDialect.cpp
   NumpyOps.cpp
 
@@ -6,8 +6,8 @@ add_mlir_dialect_library(ILNumpyDialect
   ${PROJECT_SOURCE_DIR}/include/Dialect/Numpy/IR
 
   DEPENDS
-  NpBasicpyDialect
+  NpcBasicpyDialect
   MLIRNumpyOpsIncGen
 )
 
-target_link_directories(ILNumpyDialect PUBLIC MLIRIR)
+target_link_directories(NpcNumpyDialect PUBLIC MLIRIR)

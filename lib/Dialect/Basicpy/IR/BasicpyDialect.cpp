@@ -129,14 +129,14 @@ SlotObjectType SlotObjectType::get(StringAttr className,
   return Base::get(className.getContext(), className, slotTypes);
 }
 
-////----------------------------------------------------------------------------//
-//// CPA Interface Implementation
-////----------------------------------------------------------------------------//
-//
-//Typing::CPA::TypeNode *
-//UnknownType::mapToCPAType(Typing::CPA::Context &context) {
-//  return context.newTypeVar();
-//}
+//----------------------------------------------------------------------------//
+// CPA Interface Implementation
+//----------------------------------------------------------------------------//
+
+Typing::CPA::TypeNode *
+UnknownType::mapToCPAType(Typing::CPA::Context &context) {
+  return context.newTypeVar();
+}
 
 void BasicpyDialect::initialize() {
   addOperations<

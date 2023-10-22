@@ -1,11 +1,11 @@
-add_mlir_conversion_library(ILBasicpyPasses
+add_mlir_conversion_library(NpcBasicpyPasses
     TypeInference.cpp
 
     ADDITIONAL_HEADER_DIRS
     ${PROJECT_SOURCE_DIR}/include/Dialect/Bascipy/Transforms
 
     DEPENDS
-    ILBasicpyPassIncGen
+    NpcBasicpyPassIncGen
 
     LINK_COMPONENTS
     Core
@@ -13,5 +13,5 @@ add_mlir_conversion_library(ILBasicpyPasses
     LINK_LIBS PUBLIC
     MLIRIR
     MLIRPass
-    #ILTypingCPA
+    NpcTypingCPA
 )

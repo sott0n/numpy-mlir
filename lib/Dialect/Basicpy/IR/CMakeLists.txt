@@ -1,4 +1,4 @@
-add_mlir_dialect_library(NpBasicpyDialect
+add_mlir_dialect_library(NpcBasicpyDialect
   BasicpyDialect.cpp
   BasicpyOps.cpp
 
@@ -7,7 +7,7 @@ add_mlir_dialect_library(NpBasicpyDialect
 
   DEPENDS
   MLIRBasicpyOpsIncGen
-  #ILTypingCPA
+  NpcTypingCPA
 )
 
-target_link_directories(NpBasicpyDialect PUBLIC MLIRIR)
+target_link_directories(NpcBasicpyDialect PUBLIC MLIRIR)
