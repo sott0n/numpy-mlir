@@ -6,8 +6,8 @@
 #include "Dialect/Basicpy/IR/BasicpyDialect.h"
 #include "Dialect/Basicpy/Transforms/Passes.h"
 #include "Dialect/Numpy/IR/NumpyDialect.h"
-//#include "Dialect/Numpy/Transforms/Passes.h"
-//#include "Dialect/TCF/IR/TCFDialect.h"
+#include "Dialect/Numpy/Transforms/Passes.h"
+#include "Dialect/TCF/IR/TCFDialect.h"
 //#include "Dialect/TCF/Transforms/Passes.h"
 //#include "Dialect/TCP/IR/TCPDialect.h"
 //#include "Dialect/Ilrt/IR/IlrtDialect.h"
@@ -23,7 +23,7 @@
 void mlir::npc::registerAllDialects(DialectRegistry &registry) {
   registry.insert<npc::Basicpy::BasicpyDialect>();
   registry.insert<npc::Numpy::NumpyDialect>();
-  //registry.insert<il::tcf::TCFDialect>();
+  registry.insert<npc::tcf::TCFDialect>();
   //registry.insert<il::tcp::TCPDialect>();
   //registry.insert<il::ilrt::IlrtDialect>();
 }
@@ -36,11 +36,11 @@ namespace Basicpy {
 #include "Dialect/Basicpy/Transforms/Passes.h.inc"
 } // namespace Basicpy
 
-//namespace Numpy {
-//#define GEN_PASS_REGISTRATION
-//#include "Dialect/Numpy/Transforms/Passes.h.inc"
-//} // namespace Numpy
-//
+namespace Numpy {
+#define GEN_PASS_REGISTRATION
+#include "Dialect/Numpy/Transforms/Passes.h.inc"
+} // namespace Numpy
+
 //namespace tcf {
 //#define GEN_PASS_REGISTRATION
 //#include "Dialect/TCF/Transforms/Passes.h.inc"
@@ -68,7 +68,7 @@ void mlir::npc::registerAllPasses() {
   //    "e2e-lowering-pipeline", "E2E lowering pipeline.",
   //    mlir::il::createE2ELoweringPipeline);
   mlir::npc::Basicpy::registerPasses();
-  //mlir::il::Numpy::registerPasses();
+  mlir::npc::Numpy::registerPasses();
   //mlir::il::tcf::registerPasses();
   mlir::npc::Conversion::registerPasses();
   //mlir::il::Typing::registerPasses();

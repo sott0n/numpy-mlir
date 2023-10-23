@@ -22,7 +22,7 @@ add_mlir_library(NpInitAll
   MLIRIR
   MLIRSupport
 
-  #ILTCF
+  NpcTCF
   #ILTCP
   #ILE2E
   #ILIlrt
