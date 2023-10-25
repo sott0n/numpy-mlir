@@ -16,7 +16,7 @@
 #include "Conversion/BasicpyToStd/Passes.h"
 #include "Conversion/NumpyToTCF/Passes.h"
 #include "Conversion/TCFToTCP/Passes.h"
-//#include "Conversion/TCPToLinalg/Passes.h"
+#include "Conversion/TCPToLinalg/Passes.h"
 
 //#include "Typing/Transforms/Passes.h"
 //#include "E2E/E2E.h"

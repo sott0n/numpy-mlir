@@ -34,13 +34,14 @@ def ConvertTCFToTCP : Pass<"convert-tcf-to-tcp", "ModuleOp"> {
   let dependentDialects = ["tcf::TCFDialect", "tcp::TCPDialect"];
 }
 
-////===----------------------------------------------------------------------===//
-//// TCP conversions
-////===----------------------------------------------------------------------===//
-//
-//def ConvertTCPToLinalg : Pass<"convert-tcp-to-linalg", "ModuleOp"> {
-//  let summary = "Convert TCP to Linalg";
-//  let constructor = "mlir::il::createConvertTCPToLinalgPass()";
-//}
+//===----------------------------------------------------------------------===//
+// TCP conversions
+//===----------------------------------------------------------------------===//
+
+def ConvertTCPToLinalg : Pass<"convert-tcp-to-linalg", "ModuleOp"> {
+  let summary = "Convert TCP to Linalg";
+  let constructor = "mlir::npc::createConvertTCPToLinalgPass()";
+  let dependentDialects = ["linalg::LinalgDialect", "tcp::TCPDialect"];
+}
 
 #endif // NPC_CONVERSION_PASSES

@@ -36,7 +36,7 @@ add_mlir_library(NpInitAll
   BasicpyToStd
   NumpyToTCF
   TCFToTCP
-  #TCPToLinalg
+  TCPToLinalg
 )
 
 npc_mlir_target_includes(NpInitAll)
