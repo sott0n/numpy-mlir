@@ -9,7 +9,7 @@
 #include "Dialect/Numpy/Transforms/Passes.h"
 #include "Dialect/TCF/IR/TCFDialect.h"
 #include "Dialect/TCF/Transforms/Passes.h"
-//#include "Dialect/TCP/IR/TCPDialect.h"
+#include "Dialect/TCP/IR/TCPDialect.h"
 //#include "Dialect/Ilrt/IR/IlrtDialect.h"
 
 #include "Conversion/BasicpyToStd/Passes.h"
@@ -24,7 +24,7 @@ void mlir::npc::registerAllDialects(DialectRegistry &registry) {
   registry.insert<npc::Basicpy::BasicpyDialect>();
   registry.insert<npc::Numpy::NumpyDialect>();
   registry.insert<npc::tcf::TCFDialect>();
-  //registry.insert<npc::tcp::TCPDialect>();
+  registry.insert<npc::tcp::TCPDialect>();
   //registry.insert<il::ilrt::IlrtDialect>();
 }
 

@@ -23,7 +23,7 @@ add_mlir_library(NpInitAll
   MLIRSupport
 
   NpcTCF
-  #ILTCP
+  NpcTCP
   #ILE2E
   #ILIlrt
   NpcBasicpyDialect
