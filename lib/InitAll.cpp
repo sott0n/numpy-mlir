@@ -8,7 +8,7 @@
 #include "Dialect/Numpy/IR/NumpyDialect.h"
 #include "Dialect/Numpy/Transforms/Passes.h"
 #include "Dialect/TCF/IR/TCFDialect.h"
-//#include "Dialect/TCF/Transforms/Passes.h"
+#include "Dialect/TCF/Transforms/Passes.h"
 //#include "Dialect/TCP/IR/TCPDialect.h"
 //#include "Dialect/Ilrt/IR/IlrtDialect.h"
 
@@ -24,7 +24,7 @@ void mlir::npc::registerAllDialects(DialectRegistry &registry) {
   registry.insert<npc::Basicpy::BasicpyDialect>();
   registry.insert<npc::Numpy::NumpyDialect>();
   registry.insert<npc::tcf::TCFDialect>();
-  //registry.insert<il::tcp::TCPDialect>();
+  //registry.insert<npc::tcp::TCPDialect>();
   //registry.insert<il::ilrt::IlrtDialect>();
 }
 
@@ -41,11 +41,11 @@ namespace Numpy {
 #include "Dialect/Numpy/Transforms/Passes.h.inc"
 } // namespace Numpy
 
-//namespace tcf {
-//#define GEN_PASS_REGISTRATION
-//#include "Dialect/TCF/Transforms/Passes.h.inc"
-//} // namespace tcf
-//
+namespace tcf {
+#define GEN_PASS_REGISTRATION
+#include "Dialect/TCF/Transforms/Passes.h.inc"
+} // namespace tcf
+
 namespace Conversion {
 #define GEN_PASS_REGISTRATION
 #include "Conversion/Passes.h.inc"
@@ -69,7 +69,7 @@ void mlir::npc::registerAllPasses() {
   //    mlir::il::createE2ELoweringPipeline);
   mlir::npc::Basicpy::registerPasses();
   mlir::npc::Numpy::registerPasses();
-  //mlir::il::tcf::registerPasses();
+  mlir::npc::tcf::registerPasses();
   mlir::npc::Conversion::registerPasses();
   //mlir::il::Typing::registerPasses();
   // E2E passes.

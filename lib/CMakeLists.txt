@@ -30,7 +30,7 @@ add_mlir_library(NpInitAll
   NpcBasicpyPasses
   NpcNumpyDialect
   NpcNumpyPasses
-  #ILTCFPasses
+  NpcTCFPasses
   NpcTypingCPASupport
   #ILTypingPasses
   BasicpyToStd
