@@ -34,7 +34,7 @@ add_mlir_library(NpInitAll
   NpcTypingCPASupport
   #ILTypingPasses
   BasicpyToStd
-  #NumpyToTCF
+  NumpyToTCF
   #TCFToTCP
   #TCPToLinalg
 )

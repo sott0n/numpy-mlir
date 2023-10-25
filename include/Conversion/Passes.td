@@ -14,6 +14,16 @@ def ConvertBasicpyToStd : Pass<"convert-basicpy-to-std", "func::FuncOp"> {
   let dependentDialects = ["Basicpy::BasicpyDialect", "arith::ArithDialect"];
 }
 
+//===----------------------------------------------------------------------===//
+// Numpy conversions
+//===----------------------------------------------------------------------===//
+
+def ConvertNumpyToTCF : Pass<"convert-numpy-to-tcf", "func::FuncOp"> {
+  let summary = "Convert the numpy dialect to supported TCF ops";
+  let constructor = "mlir::npc::createConvertNumpyToTCFPass()";
+  let dependentDialects = ["Numpy::NumpyDialect"];
+}
+
 ////===----------------------------------------------------------------------===//
 //// TCF conversions
 ////===----------------------------------------------------------------------===//
@@ -30,15 +40,6 @@ def ConvertBasicpyToStd : Pass<"convert-basicpy-to-std", "func::FuncOp"> {
 //def ConvertTCPToLinalg : Pass<"convert-tcp-to-linalg", "ModuleOp"> {
 //  let summary = "Convert TCP to Linalg";
 //  let constructor = "mlir::il::createConvertTCPToLinalgPass()";
-//}
-//
-////===----------------------------------------------------------------------===//
-//// Numpy conversions
-////===----------------------------------------------------------------------===//
-//
-//def ConvertNumpyToTCF : Pass<"convert-numpy-to-tcf", "func::FuncOp"> {
-//  let summary = "Convert the numpy dialect to supported TCF ops";
-//  let constructor = "mlir::il::createConvertNumpyToTCFPass()";
 //}
 
 #endif // NPC_CONVERSION_PASSES
