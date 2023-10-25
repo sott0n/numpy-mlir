@@ -27,12 +27,12 @@ add_mlir_library(NpInitAll
   #ILE2E
   #ILIlrt
   NpcBasicpyDialect
-  NpcBasicpyPasses
   NpcNumpyDialect
+  NpcBasicpyPasses
   NpcNumpyPasses
   NpcTCFPasses
   NpcTypingCPASupport
-  #ILTypingPasses
+  NpcTypingPasses
   BasicpyToStd
   NumpyToTCF
   TCFToTCP

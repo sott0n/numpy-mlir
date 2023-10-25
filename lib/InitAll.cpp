@@ -18,7 +18,7 @@
 #include "Conversion/TCFToTCP/Passes.h"
 #include "Conversion/TCPToLinalg/Passes.h"
 
-//#include "Typing/Transforms/Passes.h"
+#include "Typing/Transforms/Passes.h"
 //#include "E2E/E2E.h"
 
 void mlir::npc::registerAllDialects(DialectRegistry &registry) {
@@ -52,11 +52,11 @@ namespace Conversion {
 #include "Conversion/Passes.h.inc"
 } // namespace Conversion
 
-//namespace Typing {
-//#define GEN_PASS_REGISTRATION
-//#include "Typing/Transforms/Passes.h.inc"
-//} // namespace Typing
-//
+namespace Typing {
+#define GEN_PASS_REGISTRATION
+#include "Typing/Transforms/Passes.h.inc"
+} // namespace Typing
+
 //#define GEN_PASS_REGISTRATION
 //#include "E2E/Passes.h.inc"
 
@@ -72,7 +72,7 @@ void mlir::npc::registerAllPasses() {
   mlir::npc::Numpy::registerPasses();
   mlir::npc::tcf::registerPasses();
   mlir::npc::Conversion::registerPasses();
-  //mlir::il::Typing::registerPasses();
+  mlir::npc::Typing::registerPasses();
   // E2E passes.
   //mlir::il::registerPasses();
 }
