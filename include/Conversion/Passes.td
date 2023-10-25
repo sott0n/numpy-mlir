@@ -24,15 +24,16 @@ def ConvertNumpyToTCF : Pass<"convert-numpy-to-tcf", "func::FuncOp"> {
   let dependentDialects = ["Numpy::NumpyDialect"];
 }
 
-////===----------------------------------------------------------------------===//
-//// TCF conversions
-////===----------------------------------------------------------------------===//
-//
-//def ConvertTCFToTCP : Pass<"convert-tcf-to-tcp", "ModuleOp"> {
-//  let summary = "Convert TCF to TCP";
-//  let constructor = "mlir::il::createConvertTCFToTCPPass()";
-//}
-//
+//===----------------------------------------------------------------------===//
+// TCF conversions
+//===----------------------------------------------------------------------===//
+
+def ConvertTCFToTCP : Pass<"convert-tcf-to-tcp", "ModuleOp"> {
+  let summary = "Convert TCF to TCP";
+  let constructor = "mlir::npc::createConvertTCFToTCPPass()";
+  let dependentDialects = ["tcf::TCFDialect", "tcp::TCPDialect"];
+}
+
 ////===----------------------------------------------------------------------===//
 //// TCP conversions
 ////===----------------------------------------------------------------------===//

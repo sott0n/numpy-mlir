@@ -4,17 +4,18 @@
 #include "mlir/Dialect/Func/IR/FuncOps.h"
 
 #include "Dialect/Basicpy/IR/BasicpyDialect.h"
-#include "Dialect/Basicpy/Transforms/Passes.h"
 #include "Dialect/Numpy/IR/NumpyDialect.h"
-#include "Dialect/Numpy/Transforms/Passes.h"
 #include "Dialect/TCF/IR/TCFDialect.h"
-#include "Dialect/TCF/Transforms/Passes.h"
 #include "Dialect/TCP/IR/TCPDialect.h"
+
+#include "Dialect/Basicpy/Transforms/Passes.h"
+#include "Dialect/Numpy/Transforms/Passes.h"
+#include "Dialect/TCF/Transforms/Passes.h"
 //#include "Dialect/Ilrt/IR/IlrtDialect.h"
 
 #include "Conversion/BasicpyToStd/Passes.h"
 #include "Conversion/NumpyToTCF/Passes.h"
-//#include "Conversion/TCFToTCP/Passes.h"
+#include "Conversion/TCFToTCP/Passes.h"
 //#include "Conversion/TCPToLinalg/Passes.h"
 
 //#include "Typing/Transforms/Passes.h"
