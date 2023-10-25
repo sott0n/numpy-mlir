@@ -84,7 +84,7 @@ set(NPC_TABLEGEN_ARGS "")
 
 add_subdirectory(include)
 add_subdirectory(lib)
-#add_subdirectory(test)
+add_subdirectory(test)
 add_subdirectory(tools)
 #
 #add_custom_target(check-il-all)
