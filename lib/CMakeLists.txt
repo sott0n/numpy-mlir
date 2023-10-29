@@ -12,7 +12,7 @@ add_subdirectory(Conversion)
 #  add_subdirectory(Backend/RefJIT)
 #endif()
 
-add_mlir_library(NpInitAll
+add_mlir_library(NpcInitAll
   InitAll.cpp
 
   LINK_COMPONENTS
@@ -39,4 +39,4 @@ add_mlir_library(NpInitAll
   TCPToLinalg
 )
 
-npc_mlir_target_includes(NpInitAll)
+npc_mlir_target_includes(NpcInitAll)

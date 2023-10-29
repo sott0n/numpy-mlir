@@ -86,9 +86,9 @@ add_subdirectory(include)
 add_subdirectory(lib)
 add_subdirectory(test)
 add_subdirectory(tools)
-#
-#add_custom_target(check-il-all)
-#add_dependencies(check-il-all check-il)
+
+add_custom_target(check-npc-all)
+add_dependencies(check-npc-all check-npc)
 
 #-------------------------------------------------------------------------------
 # Optional feature selection

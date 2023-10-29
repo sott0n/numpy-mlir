@@ -2,6 +2,7 @@
 
 #include "mlir/IR/Dialect.h"
 #include "mlir/Dialect/Func/IR/FuncOps.h"
+#include "mlir/Transforms/Passes.h"
 
 #include "Dialect/Basicpy/IR/BasicpyDialect.h"
 #include "Dialect/Numpy/IR/NumpyDialect.h"
@@ -65,6 +66,9 @@ namespace Typing {
 
 void mlir::npc::registerAllPasses() {
   using mlir::Pass;
+
+  mlir::registerCanonicalizer();
+
   //mlir::PassPipelineRegistration<E2ELoweringPipelineOptions>(
   //    "e2e-lowering-pipeline", "E2E lowering pipeline.",
   //    mlir::il::createE2ELoweringPipeline);
