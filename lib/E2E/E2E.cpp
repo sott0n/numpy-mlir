@@ -347,15 +347,15 @@ void mlir::npc::createE2ELoweringPipeline(
   // resolve this to individual extents before we lower ranked shapes.
   pm.addNestedPass<func::FuncOp>(createLowerAllocMemRefOpsPass());
 
-  //// Lower shapes to SSA values.
-  //// This replaces all tcf::GetExtentOp's with explicit SSA computations
-  //// for the scalar extent. This requires shapes which are ranked. Any
-  //// unranked shapes will need to be handled by a runtime shape type,
-  //// through we don't currently support that.
-  ////
-  //// At this point, in the case of programs with only ranked shapes, all
-  //// !shape.shape types will be gone.
-  //pm.addNestedPass<func::FuncOp>(createLowerRankedShapesPass());
+  // Lower shapes to SSA values.
+  // This replaces all tcf::GetExtentOp's with explicit SSA computations
+  // for the scalar extent. This requires shapes which are ranked. Any
+  // unranked shapes will need to be handled by a runtime shape type,
+  // through we don't currently support that.
+  //
+  // At this point, in the case of programs with only ranked shapes, all
+  // !shape.shape types will be gone.
+  pm.addNestedPass<func::FuncOp>(createLowerRankedShapesPass());
 
   //// Run a some cleanups.
   //if (options.optimize) {

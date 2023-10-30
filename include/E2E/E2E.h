@@ -24,14 +24,14 @@ std::unique_ptr<OperationPass<func::FuncOp>> createResolveShapeOfOpsPass();
 std::unique_ptr<OperationPass<func::FuncOp>>
 createResolveTensorLoadStoreOpsPass();
 
-//std::unique_ptr<OperationPass<func::FuncOp>> createLowerLinalgLoopDimOpsPass();
-//
-//std::unique_ptr<OperationPass<func::FuncOp>> createLowerRankedShapesPass();
+std::unique_ptr<OperationPass<func::FuncOp>> createLowerLinalgLoopDimOpsPass();
+
+std::unique_ptr<OperationPass<func::FuncOp>> createLowerRankedShapesPass();
 
 std::unique_ptr<OperationPass<ModuleOp>> createLowerToNpcrtABIPass();
 
-//std::unique_ptr<OperationPass<func::FuncOp>> createLowerAllocMemRefOpsPass();
-//
+std::unique_ptr<OperationPass<func::FuncOp>> createLowerAllocMemRefOpsPass();
+
 //std::unique_ptr<OperationPass<ModuleOp>> createLowerToLLVMPass();
 //
 void createLowerToHybridTensorMemRefPipeline(OpPassManager &pm);

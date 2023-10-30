@@ -1,6 +1,7 @@
 add_mlir_library(NpcE2E
   LowerToHybridTensorMemRef.cpp
   LowerToNpcrtABI.cpp
+  LowerRankedShapes.cpp
   E2E.cpp
 
   ADDITIONAL_HEADER_DIRS

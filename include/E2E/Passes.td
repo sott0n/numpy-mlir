@@ -48,11 +48,12 @@ def LowerLinalgLoopDimOps : Pass<"lower-linalg-loop-dim-ops", "func::FuncOp"> {
   let dependentDialects = ["linalg::LinalgDialect"];
 }
 
-//def LowerRankedShapes : Pass<"lower-ranked-shapes", "func::FuncOp"> {
-//  let summary = "Lower ranked !shape.shape types to SSA values";
-//  let constructor = "mlir::il::createLowerRankedShapesPass()";
-//}
-//
+def LowerRankedShapes : Pass<"lower-ranked-shapes", "func::FuncOp"> {
+ let summary = "Lower ranked !shape.shape types to SSA values";
+ let constructor = "mlir::npc::createLowerRankedShapesPass()";
+ let dependentDialects = ["shape::ShapeDialect", "npcrt::NpcrtDialect"];
+}
+
 def LowerToNpcrtABI : Pass<"lower-to-npcrt-abi", "ModuleOp"> {
   let summary = "Lower tensors at ABI boundaries to npcrt dialect";
   let constructor = "mlir::npc::createLowerToNpcrtABIPass()";
