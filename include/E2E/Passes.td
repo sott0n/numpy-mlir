@@ -42,11 +42,12 @@ def ResolveTensorLoadStoreOps : Pass<"resolve-tensor-load-store-ops", "func::Fun
   let dependentDialects = ["memref::MemRefDialect", "linalg::LinalgDialect"];
 }
 
-//def LowerLinalgLoopDimOps : Pass<"lower-linalg-loop-dim-ops", "func::FuncOp"> {
-//  let summary = "Lower dim ops introduced by linalg to loops lowering";
-//  let constructor = "mlir::il::createLowerLinalgLoopDimOpsPass()";
-//}
-//
+def LowerLinalgLoopDimOps : Pass<"lower-linalg-loop-dim-ops", "func::FuncOp"> {
+  let summary = "Lower dim ops introduced by linalg to loops lowering";
+  let constructor = "mlir::npc::createLowerLinalgLoopDimOpsPass()";
+  let dependentDialects = ["linalg::LinalgDialect"];
+}
+
 //def LowerRankedShapes : Pass<"lower-ranked-shapes", "func::FuncOp"> {
 //  let summary = "Lower ranked !shape.shape types to SSA values";
 //  let constructor = "mlir::il::createLowerRankedShapesPass()";
@@ -58,11 +59,12 @@ def LowerToNpcrtABI : Pass<"lower-to-npcrt-abi", "ModuleOp"> {
   let dependentDialects = ["npcrt::NpcrtDialect", "linalg::LinalgDialect"];
 }
 
-//def LowerAllocMemRefOps : Pass<"lower-alloc-memref-ops", "func::FuncOp"> {
-//  let summary = "Lower AllocMemrefOp's";
-//  let constructor = "mlir::il::createLowerAllocMemRefOpsPass()";
-//}
-//
+def LowerAllocMemRefOps : Pass<"lower-alloc-memref-ops", "func::FuncOp"> {
+  let summary = "Lower AllocMemrefOp's";
+  let constructor = "mlir::npc::createLowerAllocMemRefOpsPass()";
+  let dependentDialects = ["memref::MemRefDialect"];
+}
+
 //def LowerToLLVM : Pass<"e2e-lower-to-llvm", "ModuleOp"> {
 //  let summary = "Lower everything to LLVM";
 //  let constructor = "mlir::il::createLowerToLLVMPass()";

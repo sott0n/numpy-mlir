@@ -148,112 +148,112 @@ mlir::npc::createResolveTensorLoadStoreOpsPass() {
   return std::make_unique<ResolveTensorLoadStoreOps>();
 }
 
-////===----------------------------------------------------------------------===//
-//// LowerLinalgLoopDimOps
-////===----------------------------------------------------------------------===//
-//
-//namespace {
-//class LowerLinalgLoopDimOp : public OpRewritePattern<memref::DimOp> {
-//public:
-//  using OpRewritePattern::OpRewritePattern;
-//  LogicalResult matchAndRewrite(memref::DimOp op,
-//                                PatternRewriter &rewriter) const override {
-//    // TODO: Remove this const pattern when lowering to shape.get_extent.
-//    auto constIndex = op.getConstantIndex();
-//    if (!constIndex)
-//      return failure();
-//
-//    auto allocMemRef = op.getSource().getDefiningOp<tcp::AllocMemRefOp>();
-//    if (!allocMemRef)
-//      return rewriter.notifyMatchFailure(op, "could not find alloc_memref");
-//    rewriter.replaceOpWithNewOp<tcp::GetExtentOp>(
-//        op, allocMemRef.getShape().front(), *constIndex);
-//    return success();
-//  }
-//};
-//
-//} // namespace
-//
-//namespace {
-//class LowerLinalgLoopDimOps
-//    : public LowerLinalgLoopDimOpsBase<LowerLinalgLoopDimOps> {
-//  void runOnOperation() override {
-//    auto func = getOperation();
-//    auto *context = &getContext();
-//
-//    RewritePatternSet patterns(context);
-//    patterns.insert<LowerLinalgLoopDimOp>(context);
-//    ConversionTarget target(*context);
-//    target.addDynamicallyLegalOp<memref::DimOp>([](memref::DimOp op) -> bool {
-//      // TODO: We only need this because we use `dim` ops for the memref ABI.
-//      // Onse we layer that out into our own runtime types, we can remove this.
-//      return !op.getSource().getDefiningOp<tcp::AllocMemRefOp>();
-//    });
-//    target.addLegalOp<tcp::GetExtentOp>();
-//    if (failed(applyPartialConversion(func, target, std::move(patterns)))) {
-//      return signalPassFailure();
-//    }
-//  }
-//};
-//} // namespace
-//
-//std::unique_ptr<OperationPass<func::FuncOp>>
-//mlir::il::createLowerLinalgLoopDimOpsPass() {
-//  return std::make_unique<LowerLinalgLoopDimOps>();
-//}
-//
-////===----------------------------------------------------------------------===//
-//// LowerAllocMemRefOps
-////===----------------------------------------------------------------------===//
-//
-//namespace {
-//class LowerAllocMemRefOp : public OpRewritePattern<tcp::AllocMemRefOp> {
-//public:
-//  using OpRewritePattern::OpRewritePattern;
-//  LogicalResult matchAndRewrite(tcp::AllocMemRefOp op,
-//                                PatternRewriter &rewriter) const override {
-//    auto memrefType = op.getType().cast<MemRefType>();
-//    auto shape = op.getOperand(0);
-//    // std::alloc only accepts the dynamic extents as operands, so only
-//    // collect those.
-//    SmallVector<Value, 6> dynamicExtents;
-//    for (int64_t i = 0, e = memrefType.getRank(); i < e; i++) {
-//      if (memrefType.isDynamicDim(i)) {
-//        auto extent = rewriter.create<tcp::GetExtentOp>(op.getLoc(), shape, i);
-//        dynamicExtents.push_back(extent);
-//      }
-//    }
-//    rewriter.replaceOpWithNewOp<memref::AllocOp>(op, memrefType,
-//                                                 dynamicExtents);
-//    return success();
-//  }
-//};
-//} // namespace
-//
-//namespace {
-//class LowerAllocMemRefOps
-//    : public LowerAllocMemRefOpsBase<LowerAllocMemRefOps> {
-//  void runOnOperation() override {
-//    auto func = getOperation();
-//    auto *context = &getContext();
-//
-//    RewritePatternSet patterns(context);
-//    patterns.insert<LowerAllocMemRefOp>(context);
-//    ConversionTarget target(*context);
-//    target.addIllegalOp<tcp::AllocMemRefOp>();
-//    target.addLegalOp<tcp::GetExtentOp>();
-//    target.addLegalOp<memref::AllocOp>();
-//    if (failed(applyPartialConversion(func, target, std::move(patterns)))) {
-//      return signalPassFailure();
-//    }
-//  }
-//};
-//} // namespace
-//
-//std::unique_ptr<OperationPass<func::FuncOp>>
-//mlir::il::createLowerAllocMemRefOpsPass() {
-//  return std::make_unique<LowerAllocMemRefOps>();
-//}
+//===----------------------------------------------------------------------===//
+// LowerLinalgLoopDimOps
+//===----------------------------------------------------------------------===//
+
+namespace {
+class LowerLinalgLoopDimOp : public OpRewritePattern<memref::DimOp> {
+public:
+  using OpRewritePattern::OpRewritePattern;
+  LogicalResult matchAndRewrite(memref::DimOp op,
+                                PatternRewriter &rewriter) const override {
+    // TODO: Remove this const pattern when lowering to shape.get_extent.
+    auto constIndex = op.getConstantIndex();
+    if (!constIndex)
+      return failure();
+
+    auto allocMemRef = op.getSource().getDefiningOp<tcp::AllocMemRefOp>();
+    if (!allocMemRef)
+      return rewriter.notifyMatchFailure(op, "could not find alloc_memref");
+    rewriter.replaceOpWithNewOp<tcp::GetExtentOp>(
+        op, allocMemRef.getShape().front(), *constIndex);
+    return success();
+  }
+};
+
+} // namespace
+
+namespace {
+class LowerLinalgLoopDimOps
+    : public LowerLinalgLoopDimOpsBase<LowerLinalgLoopDimOps> {
+  void runOnOperation() override {
+    auto func = getOperation();
+    auto *context = &getContext();
+
+    RewritePatternSet patterns(context);
+    patterns.insert<LowerLinalgLoopDimOp>(context);
+    ConversionTarget target(*context);
+    target.addDynamicallyLegalOp<memref::DimOp>([](memref::DimOp op) -> bool {
+      // TODO: We only need this because we use `dim` ops for the memref ABI.
+      // Onse we layer that out into our own runtime types, we can remove this.
+      return !op.getSource().getDefiningOp<tcp::AllocMemRefOp>();
+    });
+    target.addLegalOp<tcp::GetExtentOp>();
+    if (failed(applyPartialConversion(func, target, std::move(patterns)))) {
+      return signalPassFailure();
+    }
+  }
+};
+} // namespace
+
+std::unique_ptr<OperationPass<func::FuncOp>>
+mlir::npc::createLowerLinalgLoopDimOpsPass() {
+  return std::make_unique<LowerLinalgLoopDimOps>();
+}
+
+//===----------------------------------------------------------------------===//
+// LowerAllocMemRefOps
+//===----------------------------------------------------------------------===//
+
+namespace {
+class LowerAllocMemRefOp : public OpRewritePattern<tcp::AllocMemRefOp> {
+public:
+  using OpRewritePattern::OpRewritePattern;
+  LogicalResult matchAndRewrite(tcp::AllocMemRefOp op,
+                                PatternRewriter &rewriter) const override {
+    auto memrefType = op.getType().cast<MemRefType>();
+    auto shape = op.getOperand(0);
+    // std::alloc only accepts the dynamic extents as operands, so only
+    // collect those.
+    SmallVector<Value, 6> dynamicExtents;
+    for (int64_t i = 0, e = memrefType.getRank(); i < e; i++) {
+      if (memrefType.isDynamicDim(i)) {
+        auto extent = rewriter.create<tcp::GetExtentOp>(op.getLoc(), shape, i);
+        dynamicExtents.push_back(extent);
+      }
+    }
+    rewriter.replaceOpWithNewOp<memref::AllocOp>(op, memrefType,
+                                                 dynamicExtents);
+    return success();
+  }
+};
+} // namespace
+
+namespace {
+class LowerAllocMemRefOps
+    : public LowerAllocMemRefOpsBase<LowerAllocMemRefOps> {
+  void runOnOperation() override {
+    auto func = getOperation();
+    auto *context = &getContext();
+
+    RewritePatternSet patterns(context);
+    patterns.insert<LowerAllocMemRefOp>(context);
+    ConversionTarget target(*context);
+    target.addIllegalOp<tcp::AllocMemRefOp>();
+    target.addLegalOp<tcp::GetExtentOp>();
+    target.addLegalOp<memref::AllocOp>();
+    if (failed(applyPartialConversion(func, target, std::move(patterns)))) {
+      return signalPassFailure();
+    }
+  }
+};
+} // namespace
+
+std::unique_ptr<OperationPass<func::FuncOp>>
+mlir::npc::createLowerAllocMemRefOpsPass() {
+  return std::make_unique<LowerAllocMemRefOps>();
+}
 
 //===----------------------------------------------------------------------===//
 // createE2ELoweringPipeline
@@ -321,31 +321,31 @@ void mlir::npc::createE2ELoweringPipeline(
   //// converted.
   pm.addPass(createLowerToNpcrtABIPass());
 
-  //// At this point, we have loose shape calculations floating around, so
-  //// it's a good time to do some general cleanups.
-  //if (options.optimize) {
-  //  pm.addPass(createCanonicalizerPass());
-  //  pm.addPass(createCSEPass());
-  //}
+  // At this point, we have loose shape calculations floating around, so
+  // it's a good time to do some general cleanups.
+  if (options.optimize) {
+    pm.addPass(createCanonicalizerPass());
+    pm.addPass(createCSEPass());
+  }
 
-  //// --------------------------------------------------------------------------
-  //// Preparation for converting to LLVM module.
-  //// --------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
+  // Preparation for converting to LLVM module.
+  // --------------------------------------------------------------------------
 
-  //// Lower Linalg ops to loops.
-  //pm.addNestedPass<func::FuncOp>(createConvertLinalgToLoopsPass());
+  // Lower Linalg ops to loops.
+  pm.addNestedPass<func::FuncOp>(createConvertLinalgToLoopsPass());
 
-  //// Lowering linalg to loops introduces `dim` ops. Here we look through
-  //// use-def chains to find `tcp.alloc_memref` ops that we can get a shape
-  //// out of.
-  //// Currently, this is trivial, but after more aggressive buffer
-  //// allocation optimizations or linalg tiling this step will need to look
-  //// through slices/views and stuff.
-  //pm.addNestedPass<func::FuncOp>(createLowerLinalgLoopDimOpsPass());
+  // Lowering linalg to loops introduces `dim` ops. Here we look through
+  // use-def chains to find `tcp.alloc_memref` ops that we can get a shape
+  // out of.
+  // Currently, this is trivial, but after more aggressive buffer
+  // allocation optimizations or linalg tiling this step will need to look
+  // through slices/views and stuff.
+  pm.addNestedPass<func::FuncOp>(createLowerLinalgLoopDimOpsPass());
 
-  //// AllocMemRefOp's take a `!shape.shape` as an argument. We need to
-  //// resolve this to individual extents before we lower ranked shapes.
-  //pm.addNestedPass<func::FuncOp>(createLowerAllocMemRefOpsPass());
+  // AllocMemRefOp's take a `!shape.shape` as an argument. We need to
+  // resolve this to individual extents before we lower ranked shapes.
+  pm.addNestedPass<func::FuncOp>(createLowerAllocMemRefOpsPass());
 
   //// Lower shapes to SSA values.
   //// This replaces all tcf::GetExtentOp's with explicit SSA computations
