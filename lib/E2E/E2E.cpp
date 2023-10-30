@@ -315,11 +315,11 @@ void mlir::npc::createE2ELoweringPipeline(
 
   //// We need to finalize the removal of tensors from the program. To do
   //// that, we need to interface with a runtime ABI.
-  //// We have a specialized dialect il-rt which models the runtime data
+  //// We have a specialized dialect npc-rt which models the runtime data
   //// stuructures, and function signatures (and presumably eventually, other
   //// ABI boundaries like external calls if we ever support it) will be
   //// converted.
-  //pm.addPass(createLowerToIlrtABIPass());
+  pm.addPass(createLowerToNpcrtABIPass());
 
   //// At this point, we have loose shape calculations floating around, so
   //// it's a good time to do some general cleanups.

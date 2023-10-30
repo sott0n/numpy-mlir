@@ -27,9 +27,9 @@ createResolveTensorLoadStoreOpsPass();
 //std::unique_ptr<OperationPass<func::FuncOp>> createLowerLinalgLoopDimOpsPass();
 //
 //std::unique_ptr<OperationPass<func::FuncOp>> createLowerRankedShapesPass();
-//
-//std::unique_ptr<OperationPass<ModuleOp>> createLowerToIlrtABIPass();
-//
+
+std::unique_ptr<OperationPass<ModuleOp>> createLowerToNpcrtABIPass();
+
 //std::unique_ptr<OperationPass<func::FuncOp>> createLowerAllocMemRefOpsPass();
 //
 //std::unique_ptr<OperationPass<ModuleOp>> createLowerToLLVMPass();

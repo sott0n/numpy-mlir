@@ -11,6 +11,7 @@
 #include "mlir/Dialect/MemRef/IR/MemRef.h"
 
 #include "Dialect/TCP/IR/TCPDialect.h"
+#include "Dialect/Npcrt/IR/NpcrtDialect.h"
 
 namespace mlir {
 class ModuleOp;

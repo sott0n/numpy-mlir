@@ -1,5 +1,6 @@
 add_mlir_library(NpcE2E
   LowerToHybridTensorMemRef.cpp
+  LowerToNpcrtABI.cpp
   E2E.cpp
 
   ADDITIONAL_HEADER_DIRS
@@ -14,4 +15,5 @@ add_mlir_library(NpcE2E
   LINK_LIBS PUBLIC
   MLIRIR
   MLIRLinalgUtils
+  MLIRFuncTransforms
 )

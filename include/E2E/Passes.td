@@ -52,11 +52,12 @@ def ResolveTensorLoadStoreOps : Pass<"resolve-tensor-load-store-ops", "func::Fun
 //  let constructor = "mlir::il::createLowerRankedShapesPass()";
 //}
 //
-//def LowerToIlrtABI : Pass<"lower-to-ilrt-abi", "ModuleOp"> {
-//  let summary = "Lower tensors at ABI boundaries to ilrt dialect";
-//  let constructor = "mlir::il::createLowerToIlrtABIPass()";
-//}
-//
+def LowerToNpcrtABI : Pass<"lower-to-npcrt-abi", "ModuleOp"> {
+  let summary = "Lower tensors at ABI boundaries to npcrt dialect";
+  let constructor = "mlir::npc::createLowerToNpcrtABIPass()";
+  let dependentDialects = ["npcrt::NpcrtDialect", "linalg::LinalgDialect"];
+}
+
 //def LowerAllocMemRefOps : Pass<"lower-alloc-memref-ops", "func::FuncOp"> {
 //  let summary = "Lower AllocMemrefOp's";
 //  let constructor = "mlir::il::createLowerAllocMemRefOpsPass()";
