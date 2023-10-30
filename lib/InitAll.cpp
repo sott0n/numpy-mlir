@@ -20,7 +20,7 @@
 #include "Conversion/TCPToLinalg/Passes.h"
 
 #include "Typing/Transforms/Passes.h"
-//#include "E2E/E2E.h"
+#include "E2E/E2E.h"
 
 void mlir::npc::registerAllDialects(DialectRegistry &registry) {
   registry.insert<npc::Basicpy::BasicpyDialect>();
@@ -58,8 +58,8 @@ namespace Typing {
 #include "Typing/Transforms/Passes.h.inc"
 } // namespace Typing
 
-//#define GEN_PASS_REGISTRATION
-//#include "E2E/Passes.h.inc"
+#define GEN_PASS_REGISTRATION
+#include "E2E/Passes.h.inc"
 
 } // namespace npc
 } // namespace mlir
@@ -78,5 +78,5 @@ void mlir::npc::registerAllPasses() {
   mlir::npc::Conversion::registerPasses();
   mlir::npc::Typing::registerPasses();
   // E2E passes.
-  //mlir::il::registerPasses();
+  mlir::npc::registerPasses();
 }

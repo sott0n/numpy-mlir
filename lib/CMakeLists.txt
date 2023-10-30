@@ -4,7 +4,7 @@ add_subdirectory(Dialect)
 add_subdirectory(Typing)
 add_subdirectory(Conversion)
 #add_subdirectory(CAPI)
-#add_subdirectory(E2E)
+add_subdirectory(E2E)
 #add_subdirectory(runtime)
 #add_subdirectory(JITRuntime)
 
@@ -24,7 +24,7 @@ add_mlir_library(NpcInitAll
 
   NpcTCF
   NpcTCP
-  #ILE2E
+  NpcE2E
   #ILIlrt
   NpcBasicpyDialect
   NpcNumpyDialect
