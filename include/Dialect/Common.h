@@ -10,7 +10,7 @@ namespace TypeRanges {
 enum {
   Basicpy = 1,
   Numpy = Basicpy + 50,
-  Ilrt = Numpy + 50,
+  Npcrt = Numpy + 50,
 };
 }
 

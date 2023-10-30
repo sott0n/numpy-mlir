@@ -25,7 +25,7 @@ add_mlir_library(NpcInitAll
   NpcTCF
   NpcTCP
   NpcE2E
-  #ILIlrt
+  Npcrt
   NpcBasicpyDialect
   NpcNumpyDialect
   NpcBasicpyPasses
